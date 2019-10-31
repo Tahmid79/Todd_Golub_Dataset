@@ -4,7 +4,7 @@ import numpy
 labels = pd.read_csv('actual.csv' , index_col=0)
 #print(labels)
 
-train = pd.read_csv('data_set_ALL_AML_train.csv')
+train = pd.read_csv('data_set_ALL_AML_independent.csv')
 
 train = train[[col for col in train.columns if col.startswith('call')==False]]
 train.set_index('Gene Accession Number')
@@ -29,11 +29,12 @@ for col in train.columns[2:]:
     #print(col, end=' ')
     cl.append(col)
 
-print()
+print('\n')
 cl.sort()
 
 print(cl)
 
+print('\n')
 ft = []
 
 for pt_no in cl:
