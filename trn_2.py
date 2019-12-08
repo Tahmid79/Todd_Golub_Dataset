@@ -16,7 +16,7 @@ labels = labels_preprocess()
 features_1 = features_preprocess()
 features_2 = features_test_preprocess()
 
-features = numpy.concatenate((features_1 ,features_2) )
+features = numpy.concatenate( (features_1 ,features_2) )
 
 clf1 = svm.SVC(kernel='linear')
 clf2 = svm.SVC(kernel='rbf')

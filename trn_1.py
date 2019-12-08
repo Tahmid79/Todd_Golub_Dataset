@@ -6,7 +6,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from matplotlib import  pyplot
-from mlxtend.plotting import plot_decision_regions
+#from mlxtend.plotting import plot_decision_regions
 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
@@ -20,6 +20,8 @@ labels_test = labels_all[38:]
 
 features_train = features_preprocess()
 features_test = features_test_preprocess()
+
+print("Dimensionality = ",len(features_train[1]))
 
 """
 scaler = MinMaxScaler()
@@ -47,6 +49,8 @@ print()
 print(pca.explained_variance_ratio_ )
 print()
 print(pca.explained_variance_ratio_.sum() )
+
+print(labels_all)
 
 
 
