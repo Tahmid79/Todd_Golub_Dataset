@@ -74,7 +74,7 @@ for i in range(4):
     #print(len(features))
 
 average_scores = [average_scores[i]*100 for i in range(len(average_scores))]
-left = [1 ,2 ,3,4]
+left = [1 ,2 ,3, 4]
 plt.bar(left , average_scores , tick_label = classifier_name , width=0.8 )
 plt.xlabel = 'Classifier'
 plt.ylabel = 'Average Accuracy K=10'
