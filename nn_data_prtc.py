@@ -25,10 +25,13 @@ for sublist in lbls:
     for item in sublist:
         prediction.append(item)
 
+
 print()
 #print(lbls)
-print(prediction)
+print(labels)
 
+labels_train = labels[38:]
+print(labels_train)
 
 
 #print(features)

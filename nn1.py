@@ -9,11 +9,17 @@ from preprocess import features_preprocess , features_test_preprocess , labels_p
 
 model = keras.Sequential()
 
-input_layer = keras.layers.Dense(3 , input_shape=[15] , activation = 'tanh')
+input_layer = keras.layers.Dense(5 , input_shape=[15] , activation = 'tanh')
 model.add(input_layer)
 
 hidden_layer = keras.layers.Dense(5 , activation = 'tanh')
 model.add(hidden_layer)
+
+hidden_layer2 = keras.layers.Dense( 8  , activation = 'relu')
+model.add(hidden_layer2)
+
+#hidden_layer3 = keras.layers.Dense(4 ,  activation = 'relu')
+#model.add(hidden_layer3)
 
 output_layer = keras.layers.Dense(1, activation = 'sigmoid')
 model.add(output_layer)
@@ -22,7 +28,6 @@ model.add(output_layer)
 gd= tf.optimizers.SGD(learning_rate = 0.01 , name = 'SGD')
 
 model.compile(optimizer=gd , loss='mean_squared_error' )
-
 
 #input_data = [[1,1,0],[1,1,1],[0,1,0],[-1,1,0],[-1,0,0],[-1,0,1],[0,0,1],[1,1,0],[1,0,0],[-1,0,0],[1,0,1],[0,1,1],[0,0,0],[-1,1,1]]
 #label_data = [[0],[0],[1],[1],[1],[0],[1],[0],[1],[1],[1],[1],[1],[0]]
@@ -35,6 +40,7 @@ for lbl in labels:
        k.append([0])
    if lbl =='ALL':
        k.append([1])
+
 
 lbls = numpy.asarray(k)
 lbls = lbls.astype(numpy.float32)
@@ -53,7 +59,7 @@ val = val.astype(numpy.float32)
 x = tf.Variable(inp)
 y = tf.Variable(val)
 
-model.fit(x, y , epochs=100 , steps_per_epoch=15 )
+model.fit(x, y , epochs=500 , steps_per_epoch=15 )
 results =  model.predict(inp , verbose=0 , steps=1)
 prediction = []
 pred_lbl = []
@@ -70,7 +76,7 @@ for lbl in prediction:
 
 
 
-accuracy = accuracy_score(pred_lbl , labels)
+accuracy = accuracy_score(pred_lbl , labels[38:] )
 
 print(results)
 #print(prediction)

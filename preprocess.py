@@ -8,6 +8,20 @@ def labels_preprocess():
     lbl = lbl_series.tolist()
     return lbl
 
+def labels_preprocess_num():
+    labels = labels_preprocess()
+    k = []
+    for item in labels:
+        if item == 'AML':
+            k.append([0])
+        if item == 'ALL':
+            k.append([1])
+
+    k = numpy.asarray(k)
+    return k
+
+
+
 def features_preprocess():
     train = pandas.read_csv('data_set_ALL_AML_train.csv')
     train = train[[col for col in train.columns if col.startswith('call') == False]]
@@ -41,7 +55,7 @@ def features_preprocess():
 
 def features_test_preprocess():
     train = pandas.read_csv('data_set_ALL_AML_independent.csv')
-    train = train[[col for col in train.columns if col.startswith('call') == False]]
+    train = train[[col for col in train.columns if col.startswith('call') == False ]]
     train.set_index('Gene Accession Number')
     #print(train.columns)
 
@@ -58,7 +72,7 @@ def features_test_preprocess():
     ft = []
 
     for pt_no in cl:
-        frame = train.loc[::, str(pt_no)  ]
+        frame = train.loc[:: , str(pt_no)  ]
         sorted_df[str(pt_no)] = frame
 
         values = frame.values

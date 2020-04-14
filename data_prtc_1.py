@@ -48,7 +48,6 @@ for pt_no in cl:
     ft.append(values)
 
 
-
 sorted_df = sorted_df.set_index(train['Gene Accession Number'])
 
 features = numpy.array(ft, dtype=float)
