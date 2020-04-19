@@ -6,7 +6,13 @@ from sklearn.decomposition import  PCA
 from sklearn.metrics import  accuracy_score
 from sklearn.utils import  shuffle
 
-from ptc.dt1_prtc import preprocess_ft_lbls , preprocess_ft_lbls_num
+import sys
+sys.path.append('../')
+
+
+
+#from ptc.dt1_prtc import preprocess_ft_lbls , preprocess_ft_lbls_num
+from data.preprocess_2nd import preprocess_ft_lbls_num ,  preprocess_ft_lbls
 
 K = 5
 cv = KFold(n_splits=K, shuffle=True)
