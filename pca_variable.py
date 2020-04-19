@@ -9,11 +9,12 @@ from sklearn.neighbors import  KNeighborsClassifier
 from sklearn.decomposition import PCA
 
 from preprocess import features_preprocess , features_test_preprocess , labels_preprocess , labels_preprocess_num
+from preprocess_2nd import  preprocess_ft_lbls_num
 
 labels = labels_preprocess()
-
 features = numpy.concatenate( (  features_preprocess() ,features_test_preprocess()  ) )
 
+#(features , labels) = preprocess_ft_lbls_num()
 
 K= 5
 cv = KFold(n_splits=K, shuffle=True)

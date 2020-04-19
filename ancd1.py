@@ -22,40 +22,39 @@ labels = labels_preprocess_num()
 
 
 
-features_trn = features[:60]
-labels_trn = labels[:60]
+features_trn = features[:60]        #splitting the data into train
+labels_trn = labels[:60]            #and test set
 
 
 features_tst = features[60:]
 labels_tst = labels[60:]
 
 
-selection  = SelectKBest(k=50)
+selection  = SelectKBest(k=50)              #Select the 50 best features
 features_trn = selection.fit_transform(features_trn , labels_trn)
 features_tst = selection.transform(features_tst)
 features = selection.transform(features)
 
 
-
 input_layer = Input(shape=(50, ))
-hd1 = Dense(20 )(input_layer)
+hd1 = Dense(20 )(input_layer)               #Constructing the autoencoder
 lky=  keras.layers.LeakyReLU()(hd1)
 output_layer = Dense(50 , activation='softmax')(hd1)
 
 model = Model(input_layer , output_layer)
 encoder = Model(input_layer ,  hd1)
-
+                                        #training the autoencoder
 model.compile(optimizer='sgd' , loss='mean_squared_error')
 model.fit( features_trn ,  features_trn , epochs=1000 , batch_size=60 )
 
 rd_dim = []
 
-for item in features:
-    lst = []
+for item in features:               #using autoencoder to reduce dimensionality
+    lst = []                        #   50 -->  20 features
     lst.append(item)
     lt = numpy.asarray(lst , dtype=numpy.float32)
-    pred = encoder.predict(lt)
-    prediction = pred[0].tolist()
+    pred = encoder.predict(lt)      #  [[  ***   ]]
+    prediction = pred[0].tolist()   # [ *** ]
     rd_dim.append(prediction)
 
 
@@ -64,8 +63,8 @@ print(rd_dim)
 rd_dim = numpy.asarray(rd_dim , dtype=numpy.float32)
 
 clf  = svm.SVC(kernel='rbf')
-clf.fit(rd_dim[:60] ,  labels[:60])
-
+clf.fit(rd_dim[:60] ,  labels[:60])                 #making predictions
+                                                    #with the reduced dimensions
 pred = clf.predict(rd_dim[60:])
 
 accuracy = accuracy_score(pred , labels[60:])

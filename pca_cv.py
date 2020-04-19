@@ -1,23 +1,34 @@
+import pandas
 import numpy
-import sklearn
 from sklearn import svm
+from sklearn.metrics import accuracy_score
+from matplotlib import  pyplot
+#from mlxtend.plotting import plot_decision_regions
 from sklearn.model_selection import KFold
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
-from sklearn.metrics import  accuracy_score
-from sklearn.utils import  shuffle
+from sklearn.feature_selection import SelectKBest
 
-from ptc.dt1_prtc import preprocess_ft_lbls , preprocess_ft_lbls_num
+from preprocess import features_preprocess ,features_test_preprocess , labels_preprocess , labels_preprocess_num
+from preprocess_2nd import  preprocess_ft_lbls_num
 
-K = 5
-cv = KFold(n_splits=K, shuffle=True)
 
-(features , labels) = preprocess_ft_lbls_num()
-#labels = numpy.asarray(labels, dtype=numpy.float32)
+scores =[]
+variance_ratio = []
+
+
+#features = numpy.concatenate( ( features_preprocess() , features_test_preprocess() ) )
+#labels = labels_preprocess_num()
+
+(features ,  labels) = preprocess_ft_lbls_num()
+
 
 variance_ratio = []
 scores = []
 
-#X, y = shuffle(X, y)
+K=10
+cv = KFold(n_splits=K, shuffle=True)
+
 
 for train, test in cv.split(features):
 
@@ -43,26 +54,13 @@ for train, test in cv.split(features):
     score = accuracy_score(labels_test , pred)
     scores.append(score)
 
-    print( pca.explained_variance_ratio_ )
     sm = pca.explained_variance_ratio_.sum()
     variance_ratio.append(sm)
 
 
 print(variance_ratio)
 print(scores)
-
-
-"""
-
-arr1 = [1, 2, 3, 4, 5]
-arr2 = [2, 3, 3, 4, 4]
-labl = [0, 1, 1, 0, 0]
-color= ['red' if l == 0 else 'green' for l in labl]
-plt.scatter(arr1, arr2, color=color)
-
-"""
-
-
+print("Average Score = " ,sum(scores)/K  )
 
 
 

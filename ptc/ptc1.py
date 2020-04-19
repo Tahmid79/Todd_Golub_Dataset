@@ -9,9 +9,13 @@ from sklearn.neighbors import  KNeighborsClassifier
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import SelectKBest
 
-from preprocess import features_preprocess ,  features_test_preprocess ,  labels_preprocess_num
+import sys
+sys.path.append('../')
 
+#from preprocess import features_preprocess ,  features_test_preprocess ,  labels_preprocess_num
+from data.preprocess import features_preprocess ,  features_test_preprocess ,  labels_preprocess_num
 
+"""
 features = [ [1,2], [1,3],[1,6], [ 1,1] , [5,6] , [6,7], [3,7] , [1,2] , [7,8] , [4,1] ]
 labels = [ [1],[0],[1],[0] ,[1],[0],[1],[0] , [1] , [0] ]
 
@@ -20,6 +24,10 @@ labels = [ [1],[0],[1],[0] ,[1],[0],[1],[0] , [1] , [0] ]
 
 features = numpy.asarray(features, dtype=numpy.float32)
 labels = numpy.asarray(labels , dtype=numpy.float32)
+"""
+
+features = numpy.concatenate((features_preprocess() , features_test_preprocess()))
+labels = labels_preprocess_num()
 
 selection = SelectKBest(k=1)
 
