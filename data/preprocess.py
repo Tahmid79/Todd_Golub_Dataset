@@ -84,4 +84,9 @@ def features_test_preprocess():
     features = numpy.array(ft, dtype=float)
     return features
 
+def ft_lbls_num():
+    features = numpy.concatenate((features_preprocess(), features_test_preprocess()))
+    labels = labels_preprocess_num()
+    return (features , labels)
+
 

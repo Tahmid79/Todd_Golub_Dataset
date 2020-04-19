@@ -65,8 +65,6 @@ def preprocess_ft_lbls_num():
 
 
     features = numpy.asarray(features ,  dtype=numpy.float32)
-    print(labels)
-    print(type(features))
     labels = numpy.asarray(labels ,  dtype=numpy.float32)
 
     return (features , labels)

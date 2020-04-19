@@ -34,6 +34,7 @@ scores = []
 K=10
 cv = KFold(n_splits=K, shuffle=True)
 
+selection = SelectKBest(k=50)
 
 for train, test in cv.split(features):
 

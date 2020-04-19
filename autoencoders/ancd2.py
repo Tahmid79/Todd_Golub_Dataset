@@ -8,7 +8,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold
 import numpy
 
-import data
 
 import sys
 sys.path.append('./data/')
