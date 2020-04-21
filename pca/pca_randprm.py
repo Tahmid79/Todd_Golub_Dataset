@@ -12,11 +12,11 @@ from sklearn.utils import  shuffle
 from data.preprocess import ft_lbls_num
 from data.preprocess_2nd import preprocess_ft_lbls_num
 
-(features , labels) = preprocess_ft_lbls_num()
+(features , labels) = ft_lbls_num()
 
 clf = svm.SVC(kernel='linear')
 
-K = 3
+K = 10
 cv  =KFold(n_splits=K, shuffle=True)
 
 pca = PCA(n_components=10)
@@ -25,7 +25,7 @@ pca = PCA(n_components=10)
 average_scores = []
 
 
-for i in range(100):
+for i in range(50):
     scores = []
     features , labels = shuffle(features, labels)
 

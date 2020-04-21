@@ -35,7 +35,7 @@ model.compile(optimizer='sgd', loss='mean_squared_error')
 
 
 K=5
-cv = KFold(n_splits=K)
+cv = KFold(n_splits=K, shuffle=True)
 scores =  []
 
 for train , test in cv.split(features):

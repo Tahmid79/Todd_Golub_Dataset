@@ -16,6 +16,7 @@ sys.path.append('../')
 
 from data.preprocess import features_preprocess ,features_test_preprocess , labels_preprocess , labels_preprocess_num
 from data.preprocess_2nd import  preprocess_ft_lbls_num
+from data.preprocess import  ft_lbls_num
 
 
 scores =[]
@@ -25,7 +26,7 @@ variance_ratio = []
 #features = numpy.concatenate( ( features_preprocess() , features_test_preprocess() ) )
 #labels = labels_preprocess_num()
 
-(features ,  labels) = preprocess_ft_lbls_num()
+(features ,  labels) = ft_lbls_num()
 
 
 variance_ratio = []
@@ -44,7 +45,7 @@ for train, test in cv.split(features):
     labels_train = labels[train]
     labels_test = labels[test]
 
-    pca = PCA(n_components=10)
+    pca = PCA(n_components=100)
     pca.fit(features_train)
 
     features_train = pca.transform(features_train)

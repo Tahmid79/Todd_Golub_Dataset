@@ -19,7 +19,7 @@ clf = svm.SVC(kernel='linear')
 K = 5
 cv  =KFold(n_splits=K, shuffle=True)
 
-pca = PCA(n_components=20)
+pca = PCA(n_components=10)
 
 
 scores = []
@@ -36,8 +36,8 @@ for train, test in cv.split(features):
     labels_trn = labels[train]
     labels_test = labels[test]
 
-    features_trn = selection.fit_transform(features_trn, labels_trn)
-    features_test =selection.transform(features_test)
+    #features_trn = selection.fit_transform(features_trn, labels_trn)
+    #features_test =selection.transform(features_test)
 
     features_trn = pca.fit_transform(features_trn, labels_trn)
     features_test = pca.transform(features_test)
@@ -65,8 +65,8 @@ for train, test in cv.split(features):
     labels_trn = labels[train]
     labels_test = labels[test]
 
-    features_trn = selection.fit_transform(features_trn, labels_trn)
-    features_test = selection.transform(features_test)
+    #features_trn = selection.fit_transform(features_trn, labels_trn)
+    #features_test = selection.transform(features_test)
 
     features_trn = pca.fit_transform(features_trn, labels_trn)
     features_test = pca.transform(features_test)
@@ -90,8 +90,8 @@ print(len(variance_ratio2))
 
 print()
 
-print([  round(item, 7) for item in variance_ratio1[30:45] ])
-print([  round(item, 7) for item in variance_ratio2[30:45] ])
+print([  round(item, 7) for item in variance_ratio1[:10] ])
+print([  round(item, 7) for item in variance_ratio2[:10] ])
 
 from pca.reg import best_fit
 
