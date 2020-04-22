@@ -9,7 +9,7 @@ sys.path.append('../data/')
 
 def preprocess_ft_lbls():
 
-    dataframe = pandas.read_csv('C:\Jetbrains\PyCharm Projects\Todd_Golub_Dataset\data\expression_data.txt' , index_col=0  , sep='\t')
+    dataframe = pandas.read_csv('../data/expression_data.txt', index_col=0, sep='\t')
 
     patient = dataframe[[col for col in dataframe.columns if col.startswith('MLL')==False ]]
 
@@ -41,7 +41,6 @@ def preprocess_ft_lbls():
 def preprocess_ft_lbls_num():
 
     dataframe = pandas.read_csv('../data/expression_data.txt' , index_col=0  , sep='\t')
-    #dataframe = pandas.read_csv('C:\Jetbrains\PyCharm Projects\Todd_Golub_Dataset\data\expression_data.txt' , index_col=0  , sep='\t')
 
     patient = dataframe[[col for col in dataframe.columns if col.startswith('MLL')==False ]]
 

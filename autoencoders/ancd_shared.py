@@ -88,9 +88,7 @@ for train, test in cv.split(features):
     labels_train = labels[train]
     labels_test = labels[test]
 
-
     clf.fit(features_train , labels_train)
-
 
     pred = clf.predict(features_test)
     score = accuracy_score(labels_test , pred)
