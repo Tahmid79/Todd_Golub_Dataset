@@ -16,8 +16,7 @@ sys.path.append('./data/')
 #from preprocess import features_test_preprocess , features_preprocess , labels_preprocess_num
 from data.preprocess_2nd import  preprocess_ft_lbls_num
 
-#features = numpy.concatenate((features_preprocess() ,  features_test_preprocess() ))
-#labels = labels_preprocess_num()
+
 
 (features , labels) = preprocess_ft_lbls_num()
 labels = numpy.asarray(labels , dtype=numpy.float32)
@@ -53,7 +52,7 @@ for train , test in cv.split(features):
     for item in features:
         lst = []
         lst.append(item)
-        lt= numpy.asarray(lst , dtype=float)
+        lt = numpy.asarray(lst , dtype=float)
         pred = encoder.predict(lt)
         prediction = pred[0].tolist()
         rd_dim.append(prediction)
