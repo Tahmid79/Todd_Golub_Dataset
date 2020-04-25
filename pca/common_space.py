@@ -28,11 +28,16 @@ pca = PCA(n_components=10)
 (features1 ,  labels1) = ft_lbls_num()
 (features2 ,  labels2) = preprocess_ft_lbls_num()
 
+print(features1.shape)
+print(features2.shape)
 
+print()
 features1 = pca.fit_transform(features1, labels1)
 
 features2 = pca.fit_transform(features2, labels2)
 
+print(features1.shape)
+print(features2.shape)
 
 K=5
 cv = KFold(n_splits=K, shuffle=True)
@@ -40,23 +45,21 @@ cv = KFold(n_splits=K, shuffle=True)
 features = numpy.concatenate( (features1, features2) )
 labels = numpy.concatenate( (labels1, labels2  ) )
 
+clf = svm.SVC(kernel='rbf')
+
 for i in range(100):
 
-    features , labels = shuffle(features , labels)
+    features1 , labels1 = shuffle(features1 , labels1)
 
-    for train, test in cv.split(features):
+    for train, test in cv.split(features1):
 
-        features_train = features[train]
-        features_test = features[test]
+        features_train = numpy.concatenate(( features1[train] , features2  ))
+        features_test = features1[test]
 
-        labels_train = labels[train]
-        labels_test = labels[test]
-
-
-        clf = svm.SVC(kernel='rbf' )
+        labels_train = numpy.concatenate(( labels1[train] ,  labels2 ))
+        labels_test = labels1[test]
 
         clf.fit(features_train , labels_train)
-
 
         pred = clf.predict(features_test)
         score = accuracy_score(labels_test , pred)
@@ -65,7 +68,8 @@ for i in range(100):
 
 print()
 print(scores)
-print('Average Score = ' , round( sum(scores)/(5 * 100) ,  5  )  )
+print('Average Score = ' , round( sum(scores)/(len(scores)) ,  5  )  )
+print('Standard Deviation = ' , numpy.std(  scores ) )
 
 
 

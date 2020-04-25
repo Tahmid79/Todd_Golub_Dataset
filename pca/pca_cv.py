@@ -37,6 +37,10 @@ cv = KFold(n_splits=K, shuffle=True)
 
 selection = SelectKBest(k=50)
 
+pca = PCA(n_components=10)
+
+clf = svm.SVC(kernel='linear')
+
 for train, test in cv.split(features):
 
     features_train = features[train]
@@ -45,14 +49,11 @@ for train, test in cv.split(features):
     labels_train = labels[train]
     labels_test = labels[test]
 
-    pca = PCA(n_components=10)
     pca.fit(features_train)
 
     features_train = pca.transform(features_train)
     features_test = pca.transform(features_test)
 
-
-    clf = svm.SVC(kernel='linear')
 
     clf.fit(features_train , labels_train)
 
@@ -68,6 +69,7 @@ for train, test in cv.split(features):
 print(variance_ratio)
 print(scores)
 print("Average Score = " ,sum(scores)/K  )
+
 
 
 

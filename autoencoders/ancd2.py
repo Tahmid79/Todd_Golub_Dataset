@@ -9,16 +9,12 @@ from sklearn.model_selection import KFold
 import numpy
 
 
-import sys
-sys.path.append('./data/')
-
-
-#from preprocess import features_test_preprocess , features_preprocess , labels_preprocess_num
+from data.preprocess import ft_lbls_num
 from data.preprocess_2nd import  preprocess_ft_lbls_num
 
 
 
-(features , labels) = preprocess_ft_lbls_num()
+(features , labels) = ft_lbls_num()
 labels = numpy.asarray(labels , dtype=numpy.float32)
 
 input = Input(shape=(50,))
@@ -29,7 +25,7 @@ output = Dense(50, activation='softmax')(hd1)
 model = Model(input, output)
 encoder = Model(input, hd1)
 
-model.compile(optimizer='sgd', loss='mean_squared_error')
+model.compile(optimizer='adam', loss='binary_crossentropy')
 
 
 

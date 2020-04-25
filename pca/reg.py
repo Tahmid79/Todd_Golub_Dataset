@@ -7,6 +7,7 @@ from sklearn.decomposition import  PCA
 from matplotlib import pyplot
 
 
+
 x = numpy.array([1, 3, 5, 7])
 y = numpy.array([ 6, 3, 9, 5 ])
 

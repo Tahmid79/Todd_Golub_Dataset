@@ -14,13 +14,13 @@ from data.preprocess_2nd import preprocess_ft_lbls_num
 
 (features , labels) = ft_lbls_num()
 
-clf = svm.SVC(kernel='rbf')
+
 
 K = 5
-cv  =KFold(n_splits=K, shuffle=True)
+cv  = KFold(n_splits=K, shuffle=True)
 
-pca = PCA(n_components=10)
 
+clf = svm.SVC(kernel='rbf')
 
 scores = []
 
@@ -35,8 +35,6 @@ for i in range(100):
         labels_trn = labels[train]
         labels_test = labels[test]
 
-        features_trn = pca.fit_transform(features_trn, labels_trn)
-        features_test = pca.transform(features_test)
 
         clf.fit(features_trn, labels_trn)
         result = clf.predict(features_test)
@@ -48,6 +46,13 @@ print()
 print(scores)
 print('Average Score = ' , round( sum(scores)/(len(scores)) ,  5  )  )
 print('Standard Deviation = ' , numpy.std(  scores ) )
+
+
+ft1 , lb1 = preprocess_ft_lbls_num()
+
+print(ft1.shape)
+
+
 
 
 
