@@ -9,6 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.utils import shuffle
+from sklearn.manifold import LocallyLinearEmbedding
 
 
 from data.preprocess import features_preprocess ,features_test_preprocess , labels_preprocess , labels_preprocess_num
@@ -18,15 +19,15 @@ from data.preprocess import  ft_lbls_num
 
 scores = []
 
-pca = PCA(n_components=10)
+embedding = LocallyLinearEmbedding(n_components=10 , n_neighbors=15)
 
 
 (features1 ,  labels1) = ft_lbls_num()
 (features2 ,  labels2) = preprocess_ft_lbls_num()
 
 
-features1 = pca.fit_transform(features1, labels1)
-features2 = pca.fit_transform(features2, labels2)
+features1 = embedding.fit_transform(features1, labels1)
+features2 = embedding.fit_transform(features2, labels2)
 
 
 K=5

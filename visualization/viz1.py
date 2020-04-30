@@ -19,10 +19,10 @@ from data.preprocess import  ft_lbls_num
 
 matplotlib.use('TkAgg')
 
-embedding = PCA(n_components=3)
+#embedding = PCA(n_components=3)
 
 #embedding = LocallyLinearEmbedding(n_components=3 , n_neighbors=15)
-#embedding = Isomap(n_neighbors=15, n_components=3)
+embedding = Isomap(n_neighbors=15, n_components=3)
 #embedding = MDS(n_components=3)
 
 
@@ -64,7 +64,7 @@ ax.scatter3D(x_points , y_points , z_points , cmap='hsv', color=colors  )
 features = features2.tolist()
 labels =   [item[0]  for item in labels2.tolist()]
 
-colors = ['red' if l==0  else 'blue'  for l in labels ]
+colors = ['orange' if l==0  else 'green'  for l in labels ]
 
 
 x_points = [point[0] for point in features]

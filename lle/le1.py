@@ -8,6 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.utils import  shuffle
+from sklearn.manifold import LocallyLinearEmbedding
 
 
 from data.preprocess import ft_lbls_num
@@ -20,7 +21,7 @@ clf = svm.SVC(kernel='rbf')
 K = 5
 cv  = KFold(n_splits=K, shuffle=True)
 
-pca = PCA(n_components=10)
+embedding = LocallyLinearEmbedding(n_components=10 , n_neighbors=20)
 
 
 scores = []
@@ -36,8 +37,8 @@ for i in range(100):
         labels_trn = labels[train]
         labels_test = labels[test]
 
-        features_trn = pca.fit_transform(features_trn, labels_trn)
-        features_test = pca.transform(features_test)
+        features_trn = embedding.fit_transform(features_trn, labels_trn)
+        features_test = embedding.transform(features_test)
 
         clf.fit(features_trn, labels_trn)
         result = clf.predict(features_test)
