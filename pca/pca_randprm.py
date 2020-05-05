@@ -8,6 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.utils import  shuffle
+from sklearn.naive_bayes import GaussianNB
 
 
 from data.preprocess import ft_lbls_num
@@ -20,7 +21,7 @@ clf = svm.SVC(kernel='rbf')
 K = 5
 cv  = KFold(n_splits=K, shuffle=True)
 
-pca = PCA(n_components=10)
+pca = PCA(n_components=25 )
 
 
 scores = []

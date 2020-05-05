@@ -10,7 +10,7 @@ from sklearn.decomposition import  PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.utils import shuffle
 from sklearn.naive_bayes import GaussianNB
-from sklearn.manifold import LocallyLinearEmbedding
+from sklearn.manifold import Isomap
 
 
 from data.preprocess import features_preprocess ,features_test_preprocess , labels_preprocess , labels_preprocess_num
@@ -20,7 +20,7 @@ from data.preprocess import  ft_lbls_num
 
 scores = []
 
-embedding = LocallyLinearEmbedding(n_components=10 )
+embedding = Isomap(n_components=10 )
 
 
 (features1 ,  labels1) = ft_lbls_num()
@@ -37,7 +37,7 @@ cv = KFold(n_splits=K, shuffle=True)
 features = numpy.concatenate( (features1, features2) )
 labels = numpy.concatenate( (labels1, labels2  ) )
 
-clf = svm.SVC(kernel='rbf')
+clf = GaussianNB()
 
 for i in range(100):
 

@@ -7,12 +7,13 @@ from sklearn.model_selection import KFold
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
 from sklearn.feature_selection import SelectKBest
+from sklearn.naive_bayes import GaussianNB
 from sklearn.utils import  shuffle
 
-from data.preprocess import ft_lbls_num
+from data.preprocess import ft_lbls_num , ft_lbls
 from data.preprocess_2nd import preprocess_ft_lbls_num
 
-(features , labels) = ft_lbls_num()
+(features , labels) = ft_lbls()
 
 
 
@@ -20,7 +21,7 @@ K = 5
 cv  = KFold(n_splits=K, shuffle=True)
 
 
-clf = svm.SVC(kernel='rbf')
+clf = GaussianNB()
 
 scores = []
 
@@ -32,8 +33,8 @@ for i in range(100):
         features_trn = features[train]
         features_test = features[test]
 
-        labels_trn = labels[train]
-        labels_test = labels[test]
+        labels_trn = [labels[item] for item in train]
+        labels_test = [labels[item] for item in test]
 
 
         clf.fit(features_trn, labels_trn)

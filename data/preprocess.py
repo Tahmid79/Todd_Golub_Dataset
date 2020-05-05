@@ -15,11 +15,11 @@ def labels_preprocess_num():
     k = []
     for item in labels:
         if item == 'AML':
-            k.append([0])
+            k.append([0.])
         if item == 'ALL':
-            k.append([1])
+            k.append([1.])
 
-    k = numpy.asarray(k)
+    k = numpy.asarray(k , dtype=numpy.float32)
     return k
 
 
@@ -87,8 +87,13 @@ def features_test_preprocess():
     return features
 
 def ft_lbls_num():
-    features = numpy.concatenate((features_preprocess(), features_test_preprocess()))
+    features = numpy.concatenate(( features_preprocess(), features_test_preprocess()))
     labels = labels_preprocess_num()
+    return (features , labels)
+
+def ft_lbls():
+    features = numpy.concatenate(( features_preprocess(), features_test_preprocess()))
+    labels = labels_preprocess()
     return (features , labels)
 
 

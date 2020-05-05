@@ -8,6 +8,7 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold
 from sklearn.utils import shuffle
+from sklearn.naive_bayes import GaussianNB
 
 from data.preprocess import ft_lbls_num
 from data.preprocess_2nd import preprocess_ft_lbls_num
@@ -30,8 +31,9 @@ encoder = Model(input, hd1)
 
 
 
+
 model.compile(optimizer='sgd' , loss='mean_squared_error')
-model.fit(features , features , batch_size=len(features) ,  epochs=500  )
+model.fit(features , features , batch_size=len(features) ,  epochs=2000 , validation_split=0.9    )
 
 
 rd_dim = []
@@ -53,7 +55,7 @@ K = 5
 cv = KFold(n_splits=K, shuffle=True)
 scores = []
 
-clf = svm.SVC(kernel='rbf')
+clf = svm.LinearSVC()
 
 for i in range(100):
 
@@ -71,6 +73,9 @@ for i in range(100):
         result = clf.predict(features_test)
         score = accuracy_score(result, labels_test)
         scores.append(score)
+
+
+
 
 
 print()

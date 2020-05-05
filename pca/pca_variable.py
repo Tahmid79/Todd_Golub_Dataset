@@ -1,3 +1,4 @@
+import matplotlib
 import numpy
 from sklearn import svm
 from sklearn.naive_bayes import  GaussianNB
@@ -6,12 +7,13 @@ from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import  KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 from sklearn.decomposition import PCA
 
 
 
-from preprocess import features_preprocess , features_test_preprocess , labels_preprocess , labels_preprocess_num
-from preprocess_2nd import  preprocess_ft_lbls_num
+from data.preprocess import features_preprocess , features_test_preprocess , labels_preprocess , labels_preprocess_num
+from data.preprocess_2nd import  preprocess_ft_lbls_num
 
 labels = labels_preprocess()
 features = numpy.concatenate( (  features_preprocess() ,features_test_preprocess()  ) )
@@ -27,7 +29,7 @@ pca15 = PCA(n_components=15)
 pca20 =PCA(n_components=20)
 pca25 = PCA(n_components=25)
 
-clf = svm.SVC(kernel='linear')
+clf = svm.LinearSVC()
 
 average_scores = []
 
@@ -64,10 +66,18 @@ for i in range(len(pca_list)):
     print(scores)
     print('\n')
 
+matplotlib.use('TkAgg')
+fig, ax = plt.subplots()
+
+ax.set_xlabel('No of Principal Components')
+ax.set_ylabel( 'Average Accuracy K=5')
+
 component_num_str = ['5','10','15','20','25']
+
+
 plt.bar(list(range(1,6)) , average_scores , tick_label = component_num_str , width=0.5 )
-plt.xlabel = 'Principal Components'
-plt.ylabel = 'Average Accuracy K=10'
+
+
 plt.show()
 
 

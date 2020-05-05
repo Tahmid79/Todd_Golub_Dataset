@@ -9,6 +9,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import  PCA
 from sklearn.feature_selection import SelectKBest
 from sklearn.utils import shuffle
+from sklearn.naive_bayes import  GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
 
 
 from data.preprocess import features_preprocess ,features_test_preprocess , labels_preprocess , labels_preprocess_num
@@ -29,7 +31,7 @@ features1 = pca.fit_transform(features1, labels1)
 features2 = pca.fit_transform(features2, labels2)
 
 
-K=5
+K=10
 cv = KFold(n_splits=K, shuffle=True)
 
 features = numpy.concatenate( (features1, features2) )

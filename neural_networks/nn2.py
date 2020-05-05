@@ -26,6 +26,7 @@ output=  Dense(1 , activation='softmax')(hd2)
 model = Model(input , output)
 
 model.compile(loss='mean_squared_error' , optimizer='sgd')
+model.fit(features , labels , batch_size=len(features) , epochs=100 ,  validation_split=0.9  )
 
 
 cv = KFold(n_splits=5)
@@ -46,7 +47,7 @@ for i in range(100):
         labels_trn = labels[train]
         labels_test = labels[test]
 
-        model.fit(features_trn , labels_trn , batch_size=len(features_trn) , epochs=100 )
+        #model.fit(features_trn , labels_trn , batch_size=len(features_trn) , epochs=100 )
 
         pred = model.predict(features_test)
         score = accuracy_score(pred , labels_test)
@@ -56,18 +57,3 @@ print(scores)
 average_score = sum(scores)/(len(scores))
 print('Average Score = ' , round( average_score ,  5  )  )
 print('Standard Deviation = ' , numpy.std(  scores ) )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

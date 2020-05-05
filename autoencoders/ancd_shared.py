@@ -8,6 +8,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold
 import numpy
 from sklearn.utils import  shuffle
+from sklearn.naive_bayes import GaussianNB
 
 from sklearn.manifold import MDS, LocallyLinearEmbedding, Isomap
 
@@ -39,10 +40,10 @@ model.compile(loss='mean_squared_error', optimizer='sgd')
 for i in range(500):
 
     if ( i%2==0):
-        model.fit(features1 ,  features1 ,  batch_size=len(features1) , epochs=10 )
+        model.fit(features1 ,  features1 ,  batch_size=len(features1) , epochs=10 , validation_split=0.9 )
 
     if (i%2==1):
-        model.fit(features2, features2, batch_size=len(features2), epochs=10 ,  )
+        model.fit(features2, features2, batch_size=len(features2), epochs=10 , validation_split=0.9  )
 
 
 
@@ -79,7 +80,7 @@ labels = numpy.concatenate((labels1 , labels2))
 
 scores = []
 
-clf = svm.SVC(kernel='rbf')
+clf = GaussianNB()
 
 K=5
 cv = KFold(n_splits=K , shuffle=True)
